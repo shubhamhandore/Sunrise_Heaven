@@ -15,7 +15,6 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
-app.use(express.static(path.join(__dirname, "/public")));
 
 const MONGO_URL = "mongodb://localhost:27017/sunrisehaven";
 
@@ -143,6 +142,7 @@ app.post("/listings/:id/reviews", async (req, res) => {
 //         console.log("Sample was Saved");
 //         res.send("Successful");
 // });
+app.use(express.static(path.join(__dirname, "/public")));
 
 app.all("*", (req, res, next) => {
   next(new ExpressError(404, "Page not found!"));
