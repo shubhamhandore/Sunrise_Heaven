@@ -118,6 +118,7 @@ app.delete(
 //Review
 //Post Route
 app.post("/listings/:id/reviews", async (req, res) => {
+  let { id } = req.params;
   let listing = await Listing.findById(req.params.id);
   let newReview = new Review(req.body.reviews);
 
@@ -126,7 +127,7 @@ app.post("/listings/:id/reviews", async (req, res) => {
   await newReview.save();
   await listing.save();
 
-  res.render("new review saved");
+  res.redirect(`/listings/${id}`);
 });
 
 //Listing
