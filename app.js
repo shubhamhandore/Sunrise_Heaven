@@ -68,7 +68,6 @@ app.get(
   "/listings/:id",
   wrapAsync(async (req, res) => {
     let { id } = req.params;
-    console.log(id);
     const listing = await Listing.findById(id);
     res.render("listings/show.ejs", { listing });
   })
@@ -120,7 +119,7 @@ app.delete(
 //Post Route
 app.post("/listings/:id/reviews", async (req, res) => {
   let listing = await Listing.findById(req.params.id);
-  let newReview = new Review(req.body.review);
+  let newReview = new Review(req.body.reviews);
 
   listing.reviews.push(newReview);
 
