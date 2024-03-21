@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const reviewSchema = new Schema({
-  comment: String,
+  comment: { type: String, require: true },
   rating: {
     type: Number,
     min: 1,
     max: 5,
-    require: true,
+    required: true,
   },
   createdAt: {
     type: Date,
