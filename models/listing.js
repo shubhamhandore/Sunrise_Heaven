@@ -6,17 +6,12 @@ const Schema = mongoose.Schema;
 const listingSchema = new Schema({
   title: {
     type: String,
-    require: true,
+    requires: true,
   },
   description: String,
   image: {
-    type: String,
-    default:
-      "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    set: (v) =>
-      v === ""
-        ? "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        : v,
+    url: String,
+    filename: String,
   },
   price: Number,
   location: String,
@@ -27,6 +22,21 @@ const listingSchema = new Schema({
       ref: "Review",
     },
   ],
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
+  geometry: {
+    type: {
+      type: String, //Don't do '{location: {type:String}}'
+      enum: ["Point"], //'location.type' must be 'Point
+      required: true,
+    },
+    coordinates: {
+      type: [Number],
+      requires: true,
+    },
+  },
 });
 
 listingSchema.post("findOneAndDelete", async (listing) => {
