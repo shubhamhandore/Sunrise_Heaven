@@ -1,11 +1,11 @@
 mapboxgl.accessToken = mapToken;
-
 console.log(listing.geometry.coordinates);
+
 const map = new mapboxgl.Map({
-  container: "map", // container ID
+  container: "map", // Ensure there's an HTML element with id="map"
   style: "mapbox://styles/mapbox/streets-v12",
-  center: listing.geometry.coordinates, // starting position [lng, lat]
-  zoom: 9, // starting zoom
+  center: listing.geometry.coordinates, // [lng, lat]
+  zoom: 9,
 });
 
 const marker = new mapboxgl.Marker({ color: "red" })
